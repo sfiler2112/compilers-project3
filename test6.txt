@@ -1,0 +1,8 @@
+-- testing project 3 real_literals
+
+function main5 returns real;
+	a: real is 3.e+4;
+	b: integer is 2;
+begin
+	a - b;
+end;

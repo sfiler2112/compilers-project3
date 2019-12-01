@@ -1,0 +1,9 @@
+-- testing project 3 subtraction
+
+function main5 returns integer;
+	art: integer is 5;
+	bop: integer is 6;
+	cool: integer is 8;
+begin
+	art ** (cool rem bop) / art;
+end;

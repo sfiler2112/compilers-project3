@@ -1,0 +1,6 @@
+-- Expression with arithmetic, logical and relational operators
+
+function test2 returns boolean;
+begin
+    23 > 5 * 3 and 2 - 1 < 8;    
+end;

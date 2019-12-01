@@ -1,0 +1,11 @@
+-- Case statement in function
+
+function main5 returns integer;
+	a: integer is 5;
+	b: integer is 6;
+begin
+	case b - a is
+		when 1 => a + b;
+		others = a * 2 + b;
+	endcase;
+end;

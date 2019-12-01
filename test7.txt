@@ -1,0 +1,6 @@
+-- Testing project 3 bool literal conversion
+
+function test2 returns boolean;
+begin
+    true or false;    
+end;
