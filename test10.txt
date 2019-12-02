@@ -1,0 +1,6 @@
+-- Testing project 3 if statement
+
+function test2 a: integer, b: integer returns integer;
+begin
+	a + b;
+end;

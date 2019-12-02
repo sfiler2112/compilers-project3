@@ -1,0 +1,11 @@
+-- Testing project 3 if statement
+
+function test2 returns boolean;
+begin
+    if 2 <= 3 
+	then 
+		true;
+	else
+		false;
+    endif;    
+end;

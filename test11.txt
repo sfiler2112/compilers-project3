@@ -1,0 +1,11 @@
+-- Testing project 3 case statement
+
+function test2 a: integer returns boolean;
+begin
+	case a is
+		when 8 => true;
+		when 9 => true;
+		when 10 => true;
+		others => false;
+	endcase;
+end;

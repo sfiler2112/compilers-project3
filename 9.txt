@@ -1,0 +1,11 @@
+-- Testing project 3 if statement
+
+function test2 returns integer;
+begin
+    if 2 == 3 
+	then 
+		5;
+	else
+		6;
+    endif;    
+end;

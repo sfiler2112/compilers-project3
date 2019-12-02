@@ -1,6 +1,8 @@
 /* Compiler Theory and Design
    Duane J. Jarc */
 
+/* Edited by Sean Filer on 11-29-2019 */
+
 /* This file contains flex input file */
 
 %{
@@ -59,6 +61,7 @@ integer		{ ECHO; return(INTEGER); }
 is		{ ECHO; return(IS); }
 not		{ ECHO; return(NOTOP); }
 or		{ ECHO; return(OROP); }
+others		{ ECHO; return(OTHERS); }
 reduce		{ ECHO; return(REDUCE); }
 real		{ ECHO; return(REAL); }
 rem		{ ECHO; yylval.oper = REMAINDER; return(REMOP); }

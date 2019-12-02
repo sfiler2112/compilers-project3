@@ -1,0 +1,6 @@
+-- Testing project 3 relational operators
+
+function test2 returns boolean;
+begin
+    2 == 2;    
+end;

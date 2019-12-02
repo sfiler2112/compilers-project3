@@ -1,12 +1,16 @@
 /* Compiler Theory and Design
    Duane J. Jarc */
 
+// Edited by Sean Filer on 12/1/2019
+
 %{
 
 #include <iostream>
 #include <string>
 #include <vector>
 #include <map>
+#include <array>
+#include <cmath>
 
 using namespace std;
 
@@ -20,7 +24,9 @@ void yyerror(const char* message);
 Symbols<float> symbols;
 
 float result;
-
+float *parameters;
+int parameterCount;
+int currentParameterIndex = 0;
 %}
 
 %error-verbose
@@ -40,7 +46,7 @@ float result;
 %token ARROW
 %token BEGIN_ BOOLEAN END ENDREDUCE FUNCTION INTEGER IS REDUCE RETURNS THEN WHEN REAL OTHERS IF ENDIF CASE ENDCASE ELSE 
 
-%type <value> body statement_ statement reductions expression and_expression relation term case_statement if_statement reduce_statement optional_reductions factor exponent primary 
+%type <value> body statement_ statement reductions expression and_expression relation term case_statement if_statement reduce_statement optional_reductions factor exponent primary case_ case
 %type <oper> operator
 
 %%
@@ -49,7 +55,7 @@ function:
 	function_header optional_variable body {result = $3;} ;
 	
 function_header:	
-	FUNCTION IDENTIFIER RETURNS type ';' ;
+	FUNCTION IDENTIFIER optional_parameters RETURNS type ';' ;
 
 optional_variable:
 	variable_ |
@@ -71,7 +77,7 @@ parameter_:
 	parameter_ ',' parameter ;
 
 parameter:
-	IDENTIFIER ':' type;
+	IDENTIFIER ':' type {symbols.insert($1, parameters[currentParameterIndex]); currentParameterIndex++;} ;
 
 type:
 	INTEGER |
@@ -92,24 +98,21 @@ statement:
 	case_statement ;
 
 case_statement:
-	CASE expression IS optional_case OTHERS ARROW statement_ ENDCASE 
+	CASE expression IS case_ OTHERS ARROW statement_ ENDCASE {$$ = isnan($4) ? $7 : $4;} ;
 
 if_statement:
-	IF expression THEN statement_ ELSE statement_ ENDIF 
+	IF expression THEN statement_ ELSE statement_ ENDIF {$$ = $2 == 0 ? $6 : $4;} ;
 
 reduce_statement:
-	REDUCE operator optional_reductions ENDREDUCE {$$ = $3;}
+	REDUCE operator optional_reductions ENDREDUCE {$$ = $3;} ;
 
-
-optional_case:
-	case_ |
-	;
 
 case_: 
-	case |
-	case_ case ;
+	case_ case { $$ = isnan($1) ? $2 : $1;} |
+	{$$ = NAN;}; 
+
 case:
-	WHEN INT_LITERAL ARROW statement_ ; 
+	WHEN INT_LITERAL ARROW statement_ {$$ = $<value>-2 == $2 ? $4 : NAN;}; 
 
 operator:
 	ADDOP |
@@ -165,6 +168,13 @@ void yyerror(const char* message)
 
 int main(int argc, char *argv[])    
 {
+	parameters = new float[argc-1];
+	parameterCount = argc-1;
+
+	for(int i = 0; i < parameterCount; i++)
+	{
+		parameters[i] = atof(argv[i+1]);
+	}
 	firstLine();
 	yyparse();
 	if (lastLine() == 0)

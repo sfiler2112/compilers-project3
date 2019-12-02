@@ -1,0 +1,13 @@
+-- Testing project 3 case statement, boolean literal, and parameters.  
+-- Should return true if the parameter given is 8,9, or 10. Otherwise, returns false.
+
+
+function test2 a: integer returns boolean;
+begin
+	case a is
+		when 8 => true;
+		when 9 => true;
+		when 10 => true;
+		others => false;
+	endcase;
+end;

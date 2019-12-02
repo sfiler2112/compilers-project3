@@ -58,7 +58,7 @@ float convertRealLiteral(CharPtr realLiteral)
 float convertBoolLiteral(CharPtr boolLiteral)
 {
 	string currentBool = boolLiteral;
-	if(currentBool.compare("true"))
+	if(currentBool.compare("true") == 0)
 	{
 		return 1;
 	} else
@@ -126,3 +126,7 @@ float evaluateArithmetic(float left, Operators operator_, float right)
 	return result;
 }
 
+void printCurrentValue(float currentValue)
+{
+	cout << "printing a value!..." << currentValue << endl;
+}

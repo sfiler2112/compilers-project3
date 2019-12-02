@@ -1,0 +1,6 @@
+-- Function with added arithmetic operators.  Should result in 66.
+
+function test1 returns integer;
+begin
+    70 - 16 / (12 rem 5) ** 2;
+end;

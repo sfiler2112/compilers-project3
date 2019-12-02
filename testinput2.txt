@@ -1,0 +1,6 @@
+-- Function with added relational, logical operators, real literals. Should return "0", representing false.
+
+function test1 returns boolean;
+begin
+    (2 >= 3 and 4.6 <= 5.2 ) or (1.1 == 1.1 and 12 > 14);
+end;
